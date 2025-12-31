@@ -84,3 +84,11 @@ div {
 .media-card img {
   filter: saturate(1.02) contrast(1.02);
 }
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  position: relative;
+}
