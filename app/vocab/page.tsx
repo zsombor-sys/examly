@@ -433,32 +433,34 @@ export default function VocabPage() {
             Free: 1 set / 48h (max 70 words). Pro: unlimited.
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button
-            variant={tab === 'cards' ? 'primary' : 'ghost'}
-            onClick={() => setTab('cards')}
-          >
-            Cards
-          </Button>
-          <Button
-            variant={tab === 'history' ? 'primary' : 'ghost'}
-            onClick={() => setTab('history')}
-          >
-            History
-          </Button>
-          <Button
-            variant={tab === 'learn' ? 'primary' : 'ghost'}
-            onClick={() => setTab('learn')}
-          >
-            Learn
-          </Button>
-          <Button variant="ghost" onClick={reset}><RotateCcw size={16} /> Reset</Button>
-          <Button onClick={generate} disabled={loading}>
-            {loading ? <Loader2 className="animate-spin" size={16} /> : <FileUp size={16} />}
-            Generate set
-          </Button>
-        </div>
-      </div>
+      <div className="flex flex-wrap gap-2 max-w-full">
+  <Button
+    variant={tab === 'cards' ? 'primary' : 'ghost'}
+    onClick={() => setTab('cards')}
+  >
+    Cards
+  </Button>
+  <Button
+    variant={tab === 'history' ? 'primary' : 'ghost'}
+    onClick={() => setTab('history')}
+  >
+    History
+  </Button>
+  <Button
+    variant={tab === 'learn' ? 'primary' : 'ghost'}
+    onClick={() => setTab('learn')}
+  >
+    Learn
+  </Button>
+  <Button variant="ghost" onClick={reset}>
+    <RotateCcw size={16} /> Reset
+  </Button>
+  <Button onClick={generate} disabled={loading}>
+    {loading ? <Loader2 className="animate-spin" size={16} /> : <FileUp size={16} />}
+    Generate set
+  </Button>
+</div>
+
 
       <div className="mt-8 grid gap-6 md:grid-cols-2">
         <Card>
