@@ -26,11 +26,11 @@ export async function POST(req: Request) {
 
     // openai.audio.speech.create returns a Response-like object with arrayBuffer()
     const audio = await openai.audio.speech.create({
-      model,
-      voice,
-      format,
-      input: text.slice(0, 4000), // keep it snappy and affordable
-    })
+  model,
+  voice,
+  input: text.slice(0, 4000),
+})
+
 
     const buf = Buffer.from(await audio.arrayBuffer())
     return new NextResponse(buf, {
