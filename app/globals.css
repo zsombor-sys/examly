@@ -6,14 +6,32 @@
   color-scheme: dark;
 }
 
+/* Mobile horizontal scroll kill-switch + sane defaults */
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   height: 100%;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   /* True black base like Linear */
   background: #000;
   color: rgba(255,255,255,0.92);
+}
+
+/* Ensure main wrappers never exceed viewport width */
+#__next,
+main,
+header,
+footer,
+section,
+div {
+  max-width: 100%;
 }
 
 .grid-bg {
@@ -51,7 +69,6 @@ body {
   -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 88%);
   mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 88%);
 }
-
 
 /* Media cards that melt into the black background */
 .media-card {
