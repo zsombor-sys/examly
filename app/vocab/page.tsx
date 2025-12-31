@@ -422,47 +422,49 @@ export default function VocabPage() {
 
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
-      <div className="flex items-end justify-between gap-6">
-        <div>
-          <h1 className="text-3xl font-semibold tracking-tight">Vocab</h1>
-          <p className="mt-2 text-white/70 max-w-[70ch]">
-            Paste a word list or upload a photo of your vocab sheet. Examly turns it into flashcards you can actually use (any language pair).
-          </p>
-          <p className="mt-1 text-xs text-white/50">
-            Free: 1 set / 48h (max 70 words). Pro: unlimited.
-          </p>
-        </div>
-      <div className="flex flex-wrap gap-2 max-w-full">
-  <Button
-    variant={tab === 'cards' ? 'primary' : 'ghost'}
-    onClick={() => setTab('cards')}
-  >
-    Cards
-  </Button>
-  <Button
-    variant={tab === 'history' ? 'primary' : 'ghost'}
-    onClick={() => setTab('history')}
-  >
-    History
-  </Button>
-  <Button
-    variant={tab === 'learn' ? 'primary' : 'ghost'}
-    onClick={() => setTab('learn')}
-  >
-    Learn
-  </Button>
-  <Button variant="ghost" onClick={reset}>
-    <RotateCcw size={16} /> Reset
-  </Button>
-  <Button onClick={generate} disabled={loading}>
-    {loading ? <Loader2 className="animate-spin" size={16} /> : <FileUp size={16} />}
-    Generate set
-  </Button>
-</div>
+  <div className="mx-auto max-w-6xl px-4 py-12">
+    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+      <div>
+        <h1 className="text-3xl font-semibold tracking-tight">Vocab</h1>
+        <p className="mt-2 text-white/70 max-w-[70ch]">
+          Paste a word list or upload a photo of your vocab sheet. Examly turns it into flashcards you can actually use (any language pair).
+        </p>
+        <p className="mt-1 text-xs text-white/50">
+          Free: 1 set / 48h (max 70 words). Pro: unlimited.
+        </p>
+      </div>
 
+      <div className="flex flex-wrap gap-2 w-full md:w-auto">
+        <Button
+          variant={tab === 'cards' ? 'primary' : 'ghost'}
+          onClick={() => setTab('cards')}
+        >
+          Cards
+        </Button>
+        <Button
+          variant={tab === 'history' ? 'primary' : 'ghost'}
+          onClick={() => setTab('history')}
+        >
+          History
+        </Button>
+        <Button
+          variant={tab === 'learn' ? 'primary' : 'ghost'}
+          onClick={() => setTab('learn')}
+        >
+          Learn
+        </Button>
+        <Button variant="ghost" onClick={reset}>
+          <RotateCcw size={16} /> Reset
+        </Button>
+        <Button onClick={generate} disabled={loading}>
+          {loading ? <Loader2 className="animate-spin" size={16} /> : <FileUp size={16} />}
+          Generate set
+        </Button>
+      </div>
+    </div>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-2">
+    <div className="mt-8 grid gap-6 md:grid-cols-2">
+
         <Card>
           <div className="text-xs uppercase tracking-[0.18em] text-white/55">Input</div>
           <div className="mt-3 flex flex-wrap items-center gap-2">
