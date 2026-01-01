@@ -6,12 +6,15 @@
   color-scheme: dark;
 }
 
-/* Mobile horizontal scroll kill-switch + sane defaults */
-* {
+/* --- Base --- */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   max-width: 100%;
@@ -19,22 +22,39 @@ html, body {
 }
 
 body {
-  /* True black base like Linear */
   background: #000;
-  color: rgba(255,255,255,0.92);
+  color: rgba(255, 255, 255, 0.92);
+  position: relative;
 }
 
-/* Ensure main wrappers never exceed viewport width */
+/* Next.js wrapper safety */
 #__next,
-main,
-header,
-footer,
-section,
-div {
+main {
+  width: 100%;
   max-width: 100%;
+  overflow-x: clip; /* better than hidden, but safe */
 }
 
-.grid-bg {
+/* Flex children: allow shrinking (IMPORTANT for truncation/overflow) */
+.minw-0 {
+  min-width: 0;
+}
+
+/* Long text safety */
+p, h1, h2, h3, h4, h5, h6, li, span, a, div {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Code blocks safety */
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* --- Background effects --- */
+.grid-bg,
+.grid-overlay {
   background-image:
     linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px);
@@ -42,7 +62,6 @@ div {
   opacity: 0.12;
 }
 
-/* Soft glow accents */
 .glow {
   position: absolute;
   inset: -40% -20% auto -20%;
@@ -59,21 +78,20 @@ div {
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
   backdrop-filter: blur(14px);
+  max-width: 100%;
 }
 
 .text-dim { color: rgba(255,255,255,0.72); }
 .text-muted { color: rgba(255,255,255,0.55); }
 
-/* Image edge fade (so visuals melt into black) */
+/* Image edge fade */
 .fade-edges {
   -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 88%);
   mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 88%);
 }
 
-/* Media cards that melt into the black background */
-.media-card {
-  background: #000;
-}
+/* Media cards */
+.media-card { background: #000; }
 .media-card::after {
   content: '';
   position: absolute;
@@ -84,11 +102,7 @@ div {
 .media-card img {
   filter: saturate(1.02) contrast(1.02);
 }
-html, body {
-  overflow-x: hidden;
-  max-width: 100%;
-}
 
-body {
-  position: relative;
-}
+/* Hide scrollbar for horizontal tab scrollers (we'll use it in Plan tabs) */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
