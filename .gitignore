@@ -1,9 +1,24 @@
+# dependencies
 node_modules
-node_modules
+
+# next
 .next
+out
+
+# env files (SECRETS!)
 .env
-.vercel
 .env.local
 .env.*.local
 
+# vercel
+.vercel
 
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# mac / editor
+.DS_Store
+.idea
+.vscode
