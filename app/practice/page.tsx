@@ -1,3 +1,13 @@
+import { checkAndConsumeOrThrow } from '@/lib/usageGuard'
+import { getUserPlanFromRequest } from '@/lib/getPlan' // ezt lejjebb adom
+
+export async function POST(req: Request) {
+  const plan = await getUserPlanFromRequest(req)
+  await checkAndConsumeOrThrow({ plan, userId: plan !== 'free' ? 'x' : null })
+
+  // ... utána mehet a meglévő OpenAI kód
+}
+
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
