@@ -1,10 +1,10 @@
-import PricingCards from '@/components/PricingCards'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 import { Button } from '@/components/ui'
 import { ArrowRight, Sparkles, Timer, FileUp, CheckCircle2 } from 'lucide-react'
 
-function MiniStat({ icon, label }: { icon: React.ReactNode; label: string }) {
+function MiniStat({ icon, label }: { icon: ReactNode; label: string }) {
   return (
     <div className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-left">
       <div className="flex items-center gap-2 text-sm text-white/90">
@@ -35,46 +35,127 @@ function Feature({
         (reverse ? 'md:[&>div:first-child]:order-2' : '')
       }
     >
-      <div>
+      <div className="min-w-0">
         <div className="text-xs uppercase tracking-[0.18em] text-white/55">{kicker}</div>
         <h3 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">{title}</h3>
         <p className="mt-4 text-base leading-relaxed text-white/70 max-w-[52ch]">{body}</p>
 
         <ul className="mt-6 space-y-2 text-sm text-white/70">
           <li className="flex gap-2">
-            <CheckCircle2 size={16} className="mt-[2px] text-white/70" />
+            <CheckCircle2 size={16} className="mt-[2px] text-white/70 shrink-0" />
             Built from your material
           </li>
           <li className="flex gap-2">
-            <CheckCircle2 size={16} className="mt-[2px] text-white/70" />
+            <CheckCircle2 size={16} className="mt-[2px] text-white/70 shrink-0" />
             Clear structure, no fluff
           </li>
           <li className="flex gap-2">
-            <CheckCircle2 size={16} className="mt-[2px] text-white/70" />
+            <CheckCircle2 size={16} className="mt-[2px] text-white/70 shrink-0" />
             Works in Hungarian and English
           </li>
         </ul>
       </div>
 
-      <div className="fade-edges rounded-2xl">
+      <div className="fade-edges rounded-2xl min-w-0">
         <Image src={img} alt={title} width={1100} height={720} className="h-auto w-full" priority={false} />
       </div>
     </div>
   )
 }
 
+function PricingCards({
+  proLink,
+  proPlusLink
+}: {
+  proLink: string
+  proPlusLink: string
+}) {
+  return (
+    <div className="mt-10 grid gap-4 md:grid-cols-2">
+      {/* PRO */}
+      <div className="glass rounded-2xl p-6 md:p-7">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <div className="text-sm text-white/60">Pro</div>
+            <div className="mt-1 text-3xl font-semibold tracking-tight">
+              €8.9<span className="text-base font-medium text-white/60"> / month</span>
+            </div>
+            <div className="mt-1 text-sm text-white/55">≈ 2 500 Ft / hó</div>
+          </div>
+          <div className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-white/70">
+            30 generations
+          </div>
+        </div>
+
+        <ul className="mt-6 space-y-2 text-sm text-white/70">
+          <li className="flex gap-2"><CheckCircle2 size={16} className="mt-[2px] shrink-0" /> Notes, Plan, Practice, Vocab</li>
+          <li className="flex gap-2"><CheckCircle2 size={16} className="mt-[2px] shrink-0" /> 6 languages for vocab</li>
+          <li className="flex gap-2"><CheckCircle2 size={16} className="mt-[2px] shrink-0" /> Priority generation speed</li>
+        </ul>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a href={proLink} target="_blank" rel="noreferrer">
+            <Button className="gap-2">
+              Subscribe <ArrowRight size={16} />
+            </Button>
+          </a>
+          <Link href="/signup">
+            <Button variant="ghost">Create account</Button>
+          </Link>
+        </div>
+
+        <p className="mt-4 text-xs text-white/45">
+          Best for regular studying. Clear monthly limit to keep costs predictable.
+        </p>
+      </div>
+
+      {/* PRO+ */}
+      <div className="glass rounded-2xl p-6 md:p-7">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <div className="text-sm text-white/60">Pro+</div>
+            <div className="mt-1 text-3xl font-semibold tracking-tight">
+              €14.9<span className="text-base font-medium text-white/60"> / month</span>
+            </div>
+            <div className="mt-1 text-sm text-white/55">60 generations / hó</div>
+          </div>
+          <div className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-white/70">
+            60 generations
+          </div>
+        </div>
+
+        <ul className="mt-6 space-y-2 text-sm text-white/70">
+          <li className="flex gap-2"><CheckCircle2 size={16} className="mt-[2px] shrink-0" /> Everything in Pro</li>
+          <li className="flex gap-2"><CheckCircle2 size={16} className="mt-[2px] shrink-0" /> Higher monthly usage</li>
+          <li className="flex gap-2"><CheckCircle2 size={16} className="mt-[2px] shrink-0" /> Best for intense exam weeks</li>
+        </ul>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a href={proPlusLink} target="_blank" rel="noreferrer">
+            <Button className="gap-2">
+              Subscribe Pro+ <ArrowRight size={16} />
+            </Button>
+          </a>
+          <Link href="/signup">
+            <Button variant="ghost">Create account</Button>
+          </Link>
+        </div>
+
+        <p className="mt-4 text-xs text-white/45">
+          For heavy usage and faster iteration. Same structure, more runs.
+        </p>
+      </div>
+    </div>
+  )
+}
+
 export default function HomePage() {
-  // ✅ TODO: ide másold be a Stripe Payment Linkeket
+  // ✅ Stripe Payment Linkek: MINDIG idézőjelek között legyenek!
   const STRIPE_PRO_LINK = "https://buy.stripe.com/9B69AV9g5cGG6U20Rp1Fe03"
   const STRIPE_PROPLUS_LINK = "https://buy.stripe.com/7sY8wR4ZP0XY92a1Vt1Fe04"
 
   return (
     <div className="relative">
-      {/* NOTE: a glow + bg már a layoutban is van nálad, de itt meghagyom, mert eddig is itt volt.
-         Ha duplán túl erősnek érzed: töröld ezt a két sort. */}
-      <div className="grid-overlay" />
-      <div className="glow" />
-
       <main>
         {/* HERO */}
         <section className="mx-auto max-w-6xl px-4 pt-14 md:pt-20">
@@ -132,7 +213,7 @@ export default function HomePage() {
           <Feature
             kicker="Vocab"
             title="Quizlet-style vocab from text or photos."
-            body="Upload a photo of your vocab sheet or paste your list. Examly turns it into flashcards, learn mode, and timed tests. Supports 6 languages (EN, HU, DE, ES, IT, LA) with AI translations."
+            body="Upload a photo of your vocab sheet or paste your list. Examly turns it into flashcards, learn mode, and timed tests. Supports 6 languages (EN, HU, DE, ES, IT, LA)."
             img="/assets/feature-vocab.png"
             reverse
           />
@@ -144,7 +225,7 @@ export default function HomePage() {
             img="/assets/feature-c.png"
           />
 
-          {/* GUIDE (kibővített üzenet a 6 nyelv miatt) */}
+          {/* GUIDE */}
           <div className="py-10">
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-8">
               <div className="text-xs uppercase tracking-[0.18em] text-white/55">Guide</div>
@@ -152,8 +233,8 @@ export default function HomePage() {
                 A quick guide to use Examly well.
               </h3>
               <p className="mt-3 text-white/70 max-w-[70ch]">
-                Learn how to upload material, generate structured notes, practice smart, and build vocab sets in 6 languages
-                (EN, HU, DE, ES, IT, LA). This is designed for learning, not cheating.
+                Learn how to upload material, generate structured notes, practice smart, and build vocab sets in 6 languages.
+                Designed for learning, not cheating.
               </p>
               <div className="mt-5">
                 <Link href="/guide">
@@ -170,11 +251,11 @@ export default function HomePage() {
         <section id="pricing" className="mx-auto max-w-6xl px-4 py-20">
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-              <div>
+              <div className="min-w-0">
                 <div className="text-xs uppercase tracking-[0.18em] text-white/55">Pricing</div>
                 <h3 className="mt-3 text-3xl font-semibold tracking-tight">Simple plans. Clear limits.</h3>
                 <p className="mt-3 text-white/70 max-w-[70ch]">
-                  Free trial is device-based (48h, up to 12 generations). Pro and Pro+ unlock full usage with monthly generation limits to keep quality consistent.
+                  Free trial is device-based (48h, up to 12 generations). Pro and Pro+ unlock monthly generation limits.
                 </p>
               </div>
 
@@ -192,7 +273,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* ✅ Pricing kockák */}
+            {/* ✅ Pricing kockák (nincs import hibája) */}
             <PricingCards proLink={STRIPE_PRO_LINK} proPlusLink={STRIPE_PROPLUS_LINK} />
           </div>
 
